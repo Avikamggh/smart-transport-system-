@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Transport Reservation System | C Programming Project</title>
+  <meta name="description" content="A simple bus and train ticket reservation simulator demonstrating core C programming concepts including structures, arrays, loops, and file handling.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       TOP OF WEBSITE: CONTRIBUTORS BAR (PROMINENT AT VERY TOP)
+       ========================================================================== -->
+  <aside class="top-contributors-bar" id="contributors-banner" aria-label="Project Contributors">
+    <div class="container">
+      <div class="contributors-inner">
+        <span class="contributors-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          Contributors
+        </span>
+        <div class="contributors-list">
+          <!-- Avikam Deol highlighted with subtle typography/accent treatment -->
+          <span class="contributor-item highlighted-lead" title="Project Contributor & Lead">
+            <span class="lead-star">★</span> AVIKAM DEOL
+          </span>
+          <span class="contributor-item">ASHISH GANGWAR</span>
+          <span class="contributor-item">DHRUV SAXENA</span>
+          <span class="contributor-item">ADITYA KUMAR</span>
+          <span class="contributor-item">GARV CHAUDHARY</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       SITE HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header" id="main-header">
+    <div class="container nav-container">
+      <a href="#hero" class="nav-brand" id="nav-brand-logo">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 15h10"/><path d="M7 11h10"/><circle cx="7" cy="18" r="1"/><circle cx="17" cy="18" r="1"/></svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">SMART TRANSPORT</span>
+          <span class="brand-subtitle">RESERVATION SYSTEM</span>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <nav>
+        <ul class="nav-menu" id="nav-menu-links">
+          <li><a href="#hero" class="nav-link active">Home</a></li>
+          <li><a href="#book-ticket" class="nav-link">Book Ticket</a></li>
+          <li><a href="#check-ticket" class="nav-link">Check Ticket</a></li>
+          <li><a href="#cancel-ticket" class="nav-link">Cancel</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="#technology" class="nav-link">C Concepts</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#book-ticket" class="nav-cta-btn">Simulator</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="academic-badge">
+            <span class="badge-dot"></span>
+            First-Year C Programming Academic Project
+          </div>
+
+          <h1 class="hero-title">
+            SMART TRANSPORT <br>
+            <span class="text-gradient">RESERVATION SYSTEM</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            A Simple Bus &amp; Train Ticket Reservation Simulator
+          </p>
+
+          <p class="hero-description">
+            A basic reservation system demonstrating ticket booking, seat availability, cancellation, and ticket status using C Programming concepts.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#book-ticket" class="btn btn-primary" id="hero-book-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+              BOOK A TICKET
+            </a>
+            <a href="#check-ticket" class="btn btn-secondary" id="hero-check-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              CHECK TICKET
+            </a>
+          </div>
+
+          <div class="hero-c-tags">
+            <span>Powered by C concepts:</span>
+            <span class="tag">struct Ticket</span>
+            <span class="tag">int seats[40]</span>
+            <span class="tag">FILE *fp</span>
+            <span class="tag">CRUD logic</span>
+          </div>
+        </div>
+
+        <!-- Clean minimal Bus / Train vector graphic -->
+        <div class="hero-visual">
+          <div class="transit-graphic-card">
+            <div class="vector-svg-wrap">
+              <svg width="380" height="240" viewBox="0 0 380 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Bus and Train Simulator Graphic">
+                <!-- Grid background subtle pattern -->
+                <line x1="20" y1="180" x2="360" y2="180" stroke="#1e293b" stroke-width="2" stroke-dasharray="6 6"/>
+                <line x1="20" y1="195" x2="360" y2="195" stroke="#38bdf8" stroke-width="1.5" opacity="0.3"/>
+                <line x1="20" y1="202" x2="360" y2="202" stroke="#10b981" stroke-width="1.5" opacity="0.3"/>
+
+                <!-- Train Illustration (Top Layer) -->
+                <rect x="40" y="45" width="230" height="75" rx="14" fill="#11224d" stroke="#38bdf8" stroke-width="2"/>
+                <path d="M230 45 L270 70 L270 120 L230 120 Z" fill="#0d1b3d" stroke="#38bdf8" stroke-width="2"/>
+                
+                <!-- Train Windows -->
+                <rect x="60" y="60" width="30" height="22" rx="4" fill="#09132b" stroke="#38bdf8" stroke-width="1.2"/>
+                <rect x="100" y="60" width="30" height="22" rx="4" fill="#09132b" stroke="#38bdf8" stroke-width="1.2"/>
+                <rect x="140" y="60" width="30" height="22" rx="4" fill="#09132b" stroke="#38bdf8" stroke-width="1.2"/>
+                <rect x="180" y="60" width="30" height="22" rx="4" fill="#09132b" stroke="#38bdf8" stroke-width="1.2"/>
+                <polygon points="225,60 250,75 250,82 225,82" fill="#38bdf8" opacity="0.25"/>
+
+                <!-- Train Headlight & Stripe -->
+                <line x1="40" y1="95" x2="270" y2="95" stroke="#38bdf8" stroke-width="3"/>
+                <circle cx="265" cy="105" r="4" fill="#fbbf24"/>
+
+                <!-- Train Wheels -->
+                <circle cx="70" cy="125" r="10" fill="#0c172e" stroke="#64748b" stroke-width="3"/>
+                <circle cx="120" cy="125" r="10" fill="#0c172e" stroke="#64748b" stroke-width="3"/>
+                <circle cx="190" cy="125" r="10" fill="#0c172e" stroke="#64748b" stroke-width="3"/>
+                <circle cx="240" cy="125" r="10" fill="#0c172e" stroke="#64748b" stroke-width="3"/>
+
+                <!-- Modern Bus Illustration (Offset Front Layer) -->
+                <rect x="130" y="115" width="210" height="70" rx="12" fill="#0f2142" stroke="#10b981" stroke-width="2"/>
+                <!-- Bus Windshield & Windows -->
+                <rect x="145" y="125" width="28" height="22" rx="3" fill="#09132b" stroke="#10b981" stroke-width="1.2"/>
+                <rect x="180" y="125" width="28" height="22" rx="3" fill="#09132b" stroke="#10b981" stroke-width="1.2"/>
+                <rect x="215" y="125" width="28" height="22" rx="3" fill="#09132b" stroke="#10b981" stroke-width="1.2"/>
+                <path d="M255 125 L325 125 L330 150 L255 150 Z" fill="#081024" stroke="#10b981" stroke-width="1.2"/>
+                
+                <!-- Bus Accent Stripe -->
+                <line x1="130" y1="160" x2="340" y2="160" stroke="#10b981" stroke-width="3"/>
+                <circle cx="333" cy="168" r="4" fill="#38bdf8"/>
+
+                <!-- Bus Wheels -->
+                <circle cx="170" cy="186" r="11" fill="#09132b" stroke="#94a3b8" stroke-width="3"/>
+                <circle cx="295" cy="186" r="11" fill="#09132b" stroke="#94a3b8" stroke-width="3"/>
+              </svg>
+            </div>
+            <div class="graphic-footer">
+              <span>Simulation Engine: <strong>Active</strong></span>
+              <span class="status-indicator">
+                <span class="badge-dot"></span> Ready for Reservations
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         DASHBOARD / SUMMARY SECTION
+         ========================================================================== -->
+    <section class="stats-section" id="dashboard" aria-label="System Dashboard Statistics">
+      <div class="container">
+        <div class="stats-grid">
+          <!-- Total Seats -->
+          <div class="stat-card">
+            <div class="stat-icon blue">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18v3"></path><path d="M20 18v3"></path><path d="M6 14h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2z"></path><line x1="4" y1="14" x2="4" y2="18"></line><line x1="20" y1="14" x2="20" y2="18"></line></svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">TOTAL SEATS</span>
+              <span class="stat-number" id="stat-total-seats">40</span>
+            </div>
+          </div>
+
+          <!-- Available Seats -->
+          <div class="stat-card">
+            <div class="stat-icon green">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">AVAILABLE</span>
+              <span class="stat-number" id="stat-available-seats">28</span>
+            </div>
+          </div>
+
+          <!-- Booked Seats -->
+          <div class="stat-card">
+            <div class="stat-icon amber">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M17 11l2 2 4-4"></path></svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">BOOKED</span>
+              <span class="stat-number" id="stat-booked-seats">12</span>
+            </div>
+          </div>
+
+          <!-- Cancelled Seats -->
+          <div class="stat-card">
+            <div class="stat-icon red">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+            </div>
+            <div class="stat-data">
+              <span class="stat-label">CANCELLED</span>
+              <span class="stat-number" id="stat-cancelled-seats">2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         BOOK TICKET & SEAT AVAILABILITY SECTION
+         ========================================================================== -->
+    <section class="booking-section section-spacing" id="book-ticket">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-tag">Interactive Simulation</span>
+          <h2 class="section-title">Book a Ticket &amp; Choose Seat</h2>
+          <p class="section-subtitle">
+            Fill in the passenger details or click an available seat from the grid below to instantly assign your ticket number.
+          </p>
+        </div>
+
+        <div class="booking-grid">
+          <!-- Reservation Form Panel -->
+          <div class="card-panel">
+            <div class="panel-header">
+              <h3 class="panel-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>
+                Reservation Form
+              </h3>
+              <span class="academic-badge" style="margin: 0; padding: 0.2rem 0.6rem; font-size: 0.72rem;">C struct Demo</span>
+            </div>
+
+            <form id="reservation-form" class="booking-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="passenger-name" class="form-label">Passenger Name *</label>
+                  <input type="text" id="passenger-name" class="form-input" placeholder="e.g. Rahul Sharma" required>
+                </div>
+                <div class="form-group">
+                  <label for="passenger-age" class="form-label">Age *</label>
+                  <input type="number" id="passenger-age" class="form-input" placeholder="e.g. 21" min="1" max="110" required>
+                </div>
+              </div>
+
+              <!-- Journey Type Toggle -->
+              <div class="form-group">
+                <label class="form-label">Journey Type *</label>
+                <div class="type-selector-group">
+                  <label class="radio-card active" id="type-bus-label">
+                    <input type="radio" name="journey-type" value="Bus" checked>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/><path d="M3 11h18"/></svg>
+                    Bus Express
+                  </label>
+                  <label class="radio-card" id="type-train-label">
+                    <input type="radio" name="journey-type" value="Train">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/></svg>
+                    Express Train
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="from-station" class="form-label">From *</label>
+                  <select id="from-station" class="form-select" required>
+                    <option value="" disabled selected>Select Origin</option>
+                    <option value="Delhi Central">Delhi Central</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Jaipur Junction">Jaipur Junction</option>
+                    <option value="Dehradun">Dehradun</option>
+                    <option value="Agra Cantt">Agra Cantt</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="to-station" class="form-label">To *</label>
+                  <select id="to-station" class="form-select" required>
+                    <option value="" disabled selected>Select Destination</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Delhi Central">Delhi Central</option>
+                    <option value="Shimla">Shimla</option>
+                    <option value="Jaipur Junction">Jaipur Junction</option>
+                    <option value="Manali">Manali</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="journey-date" class="form-label">Journey Date *</label>
+                  <input type="date" id="journey-date" class="form-input" required>
+                </div>
+                <div class="form-group">
+                  <label for="seat-number" class="form-label">Seat Number (1 - 40) *</label>
+                  <input type="number" id="seat-number" class="form-input" placeholder="Select from grid" min="1" max="40" required>
+                </div>
+              </div>
+
+              <div style="margin-top: 0.5rem;">
+                <button type="submit" class="btn btn-primary" style="width: 100%;" id="btn-confirm-booking">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  CONFIRM BOOKING
+                </button>
+              </div>
+            </form>
+
+            <!-- Generated Ticket Card (Appears after successful booking) -->
+            <div class="generated-ticket-wrapper" id="generated-ticket-box">
+              <div class="ticket-card" id="ticket-card-content">
+                <div class="ticket-header-strip">
+                  <div class="ticket-brand">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                    SMART TRANSPORT BOARDING PASS
+                  </div>
+                  <div class="ticket-pnr-badge" id="ticket-pnr-val">PNR: ST-4821</div>
+                  <div class="ticket-status-pill">
+                    <span class="badge-dot"></span> CONFIRMED
+                  </div>
+                </div>
+
+                <div class="ticket-body-grid">
+                  <div class="ticket-field">
+                    <span class="ticket-field-label">Passenger Name</span>
+                    <span class="ticket-field-val" id="ticket-name-val">Rahul Sharma</span>
+                  </div>
+                  <div class="ticket-field">
+                    <span class="ticket-field-label">Transport Type</span>
+                    <span class="ticket-field-val" id="ticket-type-val">Bus Express</span>
+                  </div>
+                  <div class="ticket-field">
+                    <span class="ticket-field-label">Seat Number</span>
+                    <span class="ticket-field-val" id="ticket-seat-val" style="color: var(--accent-blue);">Seat 14</span>
+                  </div>
+                  <div class="ticket-field" style="grid-column: span 2;">
+                    <span class="ticket-field-label">Route</span>
+                    <span class="ticket-field-val ticket-route-val" id="ticket-route-val">
+                      Delhi Central <span>➔</span> Chandigarh
+                    </span>
+                  </div>
+                  <div class="ticket-field">
+                    <span class="ticket-field-label">Journey Date</span>
+                    <span class="ticket-field-val" id="ticket-date-val">2026-09-20</span>
+                  </div>
+                </div>
+
+                <div class="ticket-footer-bar">
+                  <span>Simulation Record stored in memory</span>
+                  <button type="button" class="print-sim-btn" onclick="window.print()">
+                    🖨️ Print Ticket
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEAT AVAILABILITY PANEL -->
+          <div class="card-panel">
+            <div class="panel-header">
+              <h3 class="panel-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18v3"></path><path d="M20 18v3"></path><path d="M6 14h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2z"></path></svg>
+                Seat Availability Matrix
+              </h3>
+              <span class="academic-badge" style="margin: 0; padding: 0.2rem 0.6rem; font-size: 0.72rem;">int seats[40]</span>
+            </div>
+
+            <div class="transport-layout-controls">
+              <span class="layout-indicator" id="layout-title">Layout: 40 Seats (2x2 with Aisle)</span>
+              <span class="layout-indicator" style="color: var(--accent-blue);">Click seat to pick</span>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend-group">
+              <span class="legend-item">
+                <span class="legend-dot available"></span> Available
+              </span>
+              <span class="legend-item">
+                <span class="legend-dot selected"></span> Selected
+              </span>
+              <span class="legend-item">
+                <span class="legend-dot booked"></span> Booked
+              </span>
+            </div>
+
+            <!-- Cabin Visual Grid -->
+            <div class="cabin-box">
+              <div class="cabin-cockpit">
+                <span>[FRONT / DRIVER CABIN]</span>
+                <span>ENTRY DOOR ➔</span>
+              </div>
+              
+              <!-- 40 Seats Dynamic Grid Container -->
+              <div class="seat-grid-container" id="seat-matrix-grid">
+                <!-- Dynamically generated via app.js -->
+              </div>
+            </div>
+
+            <p class="seat-instruction">
+              💡 Tip: Click on any <strong>Available</strong> seat to auto-populate the seat field in the reservation form. Booked seats cannot be re-assigned.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CHECK TICKET & CANCEL TICKET (DUAL OPERATIONS)
+         ========================================================================== -->
+    <section class="section-spacing" id="check-ticket" style="background: rgba(10, 19, 41, 0.4);">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-tag">Booking Operations</span>
+          <h2 class="section-title">Manage Your Reservation</h2>
+          <p class="section-subtitle">
+            Search for an existing booking using your PNR or cancel a previously confirmed seat.
+          </p>
+        </div>
+
+        <div class="manage-grid">
+          <!-- 1. CHECK TICKET -->
+          <div class="action-card">
+            <div class="action-card-header">
+              <h3 class="action-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                Check Ticket Status
+              </h3>
+              <p class="action-desc">Enter your Ticket / PNR Number to retrieve passenger and route records.</p>
+            </div>
+
+            <form id="check-ticket-form" class="lookup-box">
+              <input type="text" id="check-pnr-input" class="form-input" placeholder="e.g. ST-TR-1021 or ST-BU-1004" required>
+              <button type="submit" class="btn btn-secondary" id="btn-check-status">
+                CHECK STATUS
+              </button>
+            </form>
+
+            <div class="result-card-box" id="check-result-card">
+              <p class="empty-state" id="check-empty-text">Enter a PNR number to view status details (try demo: <code>ST-TR-1021</code>)</p>
+              
+              <div class="status-result-content" id="check-details-wrap">
+                <div class="status-row">
+                  <span class="status-key">Passenger</span>
+                  <span class="status-val" id="res-passenger">Dhruv Saxena</span>
+                </div>
+                <div class="status-row">
+                  <span class="status-key">Transport</span>
+                  <span class="status-val" id="res-transport">Train Express</span>
+                </div>
+                <div class="status-row">
+                  <span class="status-key">Route</span>
+                  <span class="status-val" id="res-route">Delhi Central ➔ Chandigarh</span>
+                </div>
+                <div class="status-row">
+                  <span class="status-key">Seat</span>
+                  <span class="status-val" id="res-seat">Seat 12</span>
+                </div>
+                <div class="status-row">
+                  <span class="status-key">Booking Status</span>
+                  <span class="status-val" id="res-status" style="color: var(--accent-green);">CONFIRMED</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. CANCEL TICKET -->
+          <div class="action-card" id="cancel-ticket">
+            <div class="action-card-header">
+              <h3 class="action-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                Cancel Ticket
+              </h3>
+              <p class="action-desc">Enter your Ticket / PNR Number to release your seat and cancel your reservation.</p>
+            </div>
+
+            <form id="cancel-ticket-form" class="lookup-box">
+              <input type="text" id="cancel-pnr-input" class="form-input" placeholder="e.g. ST-BU-1008" required>
+              <button type="submit" class="btn btn-secondary" style="border-color: rgba(239, 68, 68, 0.4); color: #f87171;" id="btn-cancel-ticket">
+                CANCEL TICKET
+              </button>
+            </form>
+
+            <div class="result-card-box">
+              <p class="empty-state" id="cancel-empty-text">Enter confirmed PNR to process cancellation (try demo: <code>ST-BU-1008</code>)</p>
+              
+              <div class="cancel-alert-box" id="cancel-success-box">
+                <div style="font-weight: 700; margin-bottom: 0.25rem;">✓ Ticket cancelled successfully.</div>
+                <div style="font-size: 0.78rem; opacity: 0.85;" id="cancel-details-text">The seat has been released and marked available.</div>
+              </div>
+
+              <div class="cancel-error-box" id="cancel-error-box">
+                Invalid PNR or ticket has already been cancelled.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         "HOW IT WORKS" SECTION (4 SIMPLE STEPS)
+         ========================================================================== -->
+    <section class="section-spacing" id="how-it-works">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-tag">Workflow</span>
+          <h2 class="section-title">How It Works</h2>
+          <p class="section-subtitle">
+            A simple 4-step simulator demonstrating algorithmic ticket reservation logic.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <!-- Step 1 -->
+          <div class="step-card">
+            <div class="step-badge">01</div>
+            <h3 class="step-title">Enter Passenger Details</h3>
+            <p class="step-desc">
+              Input the traveler's name, age, departure and destination stations, journey date, and transport mode.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-card">
+            <div class="step-badge">02</div>
+            <h3 class="step-title">Select Transport &amp; Seat</h3>
+            <p class="step-desc">
+              Browse the visual seat availability matrix. Pick an unreserved seat or type in an available seat number.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-card">
+            <div class="step-badge">03</div>
+            <h3 class="step-title">Confirm Reservation</h3>
+            <p class="step-desc">
+              The algorithm verifies seat validity, validates inputs, and updates the allocation array in memory.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step-card">
+            <div class="step-badge">04</div>
+            <h3 class="step-title">Get Ticket / PNR</h3>
+            <p class="step-desc">
+              A unique PNR number is generated instantly. The ticket is ready to print, verify, or cancel anytime.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TECHNOLOGY & C PROGRAMMING CONCEPTS SECTION
+         ========================================================================== -->
+    <section class="section-spacing concepts-section" id="technology">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-tag">Academics</span>
+          <h2 class="section-title">C Programming Concepts Demonstrated</h2>
+          <p class="section-subtitle">
+            How fundamental first-year C programming structures power this transport reservation logic.
+          </p>
+        </div>
+
+        <div class="concepts-grid">
+          <!-- 1. Structures -->
+          <div class="concept-card">
+            <div class="concept-icon-wrap">
+              <span class="concept-tag-badge">struct</span>
+              <h3 class="concept-title">Structures</h3>
+            </div>
+            <p class="concept-desc">
+              Group related passenger data attributes (name, age, seat number, PNR, journey date, and status) into a custom composite data type.
+            </p>
+            <div class="concept-c-mapping">
+              struct Ticket { char pnr[10]; int seat; };
+            </div>
+          </div>
+
+          <!-- 2. Arrays -->
+          <div class="concept-card">
+            <div class="concept-icon-wrap">
+              <span class="concept-tag-badge">int[]</span>
+              <h3 class="concept-title">Arrays</h3>
+            </div>
+            <p class="concept-desc">
+              A fixed-size 1D/2D array stores seat availability flags (0 for available, 1 for booked) for instant O(1) state lookups.
+            </p>
+            <div class="concept-c-mapping">
+              int seats[40] = {0}; // 0=Free, 1=Booked
+            </div>
+          </div>
+
+          <!-- 3. Functions -->
+          <div class="concept-card">
+            <div class="concept-icon-wrap">
+              <span class="concept-tag-badge">void fn()</span>
+              <h3 class="concept-title">Functions</h3>
+            </div>
+            <p class="concept-desc">
+              Modular programming with dedicated functions for booking, checking status, cancelling tickets, and rendering seat layouts.
+            </p>
+            <div class="concept-c-mapping">
+              void bookTicket(); void cancelTicket();
+            </div>
+          </div>
+
+          <!-- 4. Conditional Statements -->
+          <div class="concept-card">
+            <div class="concept-icon-wrap">
+              <span class="concept-tag-badge">if / else</span>
+              <h3 class="concept-title">Conditional Statements</h3>
+            </div>
+            <p class="concept-desc">
+              Evaluates user inputs to prevent booking occupied seats, invalid seat indices, or cancelling non-existent PNRs.
+            </p>
+            <div class="concept-c-mapping">
+              if (seats[seatNum - 1] == 1) { /* error */ }
+            </div>
+          </div>
+
+          <!-- 5. Loops -->
+          <div class="concept-card">
+            <div class="concept-icon-wrap">
+              <span class="concept-tag-badge">for / while</span>
+              <h3 class="concept-title">Loops</h3>
+            </div>
+            <p class="concept-desc">
+              Iterates through the reservation lists and seat matrix to tally statistics, print layouts, and find tickets by PNR.
+            </p>
+            <div class="concept-c-mapping">
+              for (int i = 0; i &lt; 40; i++) display(i);
+            </div>
+          </div>
+
+          <!-- 6. File Handling & CRUD -->
+          <div class="concept-card">
+            <div class="concept-icon-wrap">
+              <span class="concept-tag-badge">FILE *fp</span>
+              <h3 class="concept-title">File Handling &amp; CRUD</h3>
+            </div>
+            <p class="concept-desc">
+              Enables persistent storage of reservation records on disk using standard binary read and write operations.
+            </p>
+            <div class="concept-c-mapping">
+              fwrite(&amp;t, sizeof(struct Ticket), 1, fp);
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive C Code Inspector Box -->
+        <div class="c-code-inspector">
+          <div class="inspector-header">
+            <div class="inspector-tabs">
+              <button class="inspector-tab active" data-snippet="structs">Ticket Struct</button>
+              <button class="inspector-tab" data-snippet="booking">bookTicket()</button>
+              <button class="inspector-tab" data-snippet="cancel">cancelTicket()</button>
+              <button class="inspector-tab" data-snippet="files">File Storage</button>
+            </div>
+            <div class="inspector-meta">C99 Standard • Academic Project Implementation</div>
+          </div>
+          <div class="inspector-code-body">
+            <pre><code id="c-code-display"><span class="cmt">// C Structure Definition for Ticket Record</span>
+<span class="kw">struct</span> <span class="type">Ticket</span> {
+    <span class="type">char</span> pnr[<span class="str">12</span>];
+    <span class="type">char</span> passengerName[<span class="str">50</span>];
+    <span class="type">int</span> age;
+    <span class="type">char</span> transportType[<span class="str">10</span>];   <span class="cmt">// "Bus" or "Train"</span>
+    <span class="type">char</span> source[<span class="str">30</span>];
+    <span class="type">char</span> destination[<span class="str">30</span>];
+    <span class="type">char</span> date[<span class="str">12</span>];
+    <span class="type">int</span> seatNumber;
+    <span class="type">int</span> isCancelled;          <span class="cmt">// 0 = Active, 1 = Cancelled</span>
+};</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROBLEM STATEMENT & ABOUT PROJECT SECTION
+         ========================================================================== -->
+    <section class="section-spacing about-section" id="about">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="section-tag">Project Scope</span>
+          <h2 class="section-title">About the Project</h2>
+          <p class="section-subtitle">
+            Bridging fundamental programming theory with practical real-world problem solving.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <!-- Problem Statement -->
+          <div class="statement-card">
+            <div class="statement-icon-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              Problem Statement
+            </div>
+            <p class="statement-text">
+              Traditional and manual transport reservation processes frequently suffer from significant operational challenges:
+            </p>
+            <ul class="statement-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                Long physical queues and slow ticketing counters.
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                Seat confusion and risk of duplicate seat bookings.
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                Difficult and error-prone physical record keeping.
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                Slow and tedious manual ticket status checks.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Project Goal & Academic Role -->
+          <div class="statement-card goal-card">
+            <div class="statement-icon-title">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent-green);"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+              Project Goal
+            </div>
+            <p class="statement-text" style="font-size: 1.05rem; font-weight: 600; color: #ffffff;">
+              "To demonstrate the core logic of a transport reservation system using fundamental C programming concepts."
+            </p>
+            <p class="statement-text">
+              This is a first-year academic project developed to demonstrate practical implementation of C Programming through a simple transport reservation workflow.
+            </p>
+            <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid var(--border-green); border-radius: var(--radius-md); padding: 0.9rem; margin-top: auto;">
+              <span style="font-size: 0.8rem; color: var(--accent-green); font-weight: 700; display: block; margin-bottom: 0.2rem;">ACADEMIC OBJECTIVE:</span>
+              <span style="font-size: 0.82rem; color: var(--text-secondary);">
+                Shows how memory allocation, loops, conditions, and structures can replace paper ledgers with an algorithmic digital reservation simulator.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Academic Limitations Notice Banner -->
+        <div class="academic-notice-card">
+          <div class="notice-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            Academic Scope &amp; Important Limitations
+          </div>
+          <p class="notice-text">
+            This simulator is designed strictly for first-year educational demonstrations and college evaluation. The following commercial elements are intentionally omitted:
+          </p>
+          <div class="limitations-badge-list">
+            <span class="limit-badge">No real payment gateways</span>
+            <span class="limit-badge">No real-time transport or GPS APIs</span>
+            <span class="limit-badge">No commercial railway claim</span>
+            <span class="limit-badge">No unnecessary complex AI</span>
+            <span class="limit-badge">No login/signup requirement</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <h4>SMART TRANSPORT RESERVATION SYSTEM</h4>
+          <p>
+            Developed as a First-Year C Programming Project demonstrating structural programming, arrays, and file-based reservation management.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-contributors-title">Project Contributors</div>
+          <div class="footer-contributors-grid">
+            <div class="footer-person highlight-lead">
+              <span style="color: var(--accent-blue);">★</span> AVIKAM DEOL
+            </div>
+            <div class="footer-person">
+              <span>•</span> ASHISH GANGWAR
+            </div>
+            <div class="footer-person">
+              <span>•</span> DHRUV SAXENA
+            </div>
+            <div class="footer-person">
+              <span>•</span> ADITYA KUMAR
+            </div>
+            <div class="footer-person">
+              <span>•</span> GARV CHAUDHARY
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 Smart Transport Reservation System • First-Year Engineering Project
+        </div>
+        <div class="footer-motto">
+          Built for learning • Designed for simplicity
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
